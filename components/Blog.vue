@@ -1,19 +1,39 @@
+
 <template>
-  <div class="blog">
-    <div class="posts" v-for="post in posts">
-      <h3>{{ post.title.rendered }}</h3>
-      <router-link :to="{ name: 'post', params: {id: post.id} }">Подробнее</router-link>
+<div class="show" v-if="show">
+<div class="container container-blog">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="blog">
+        <button v-on:click="show = false">
+          Закрыть
+        </button>
+        <ul class="cats" v-for="cat in msg">
+          <li>{{cat.name}}</li>
+        </ul>
+        <div class="posts" v-for="post in posts">
+          <div class="col-md-4">
+            <h3>{{ post.title.rendered }}</h3>
+            <div class="post1">{{ post.excerpt.rendered }}</div>
+            <router-link :to="{ name: 'post', params: {id: post.id} }">Подробнее</router-link>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</div>
+</div>
 </template>
 
 <script>
+
 export default {
-  name: 'blog',
+  props: ['msg'],
   data () {
     return {
        message: 'http://js.project/wordpress/wp-json/wp/v2/posts?per_page=20',
-       posts: '[]'
+       posts: '[]',
+       show: true
     }
   },
    methods: {
@@ -31,31 +51,15 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+<style lang="scss">
+  .blog {
+    background-color: white;
+    ul {
+      display: inline-block;
+      li {
+        text-decoration: none;
+        list-style: none;
+      }
+    }
+  }
 </style>
