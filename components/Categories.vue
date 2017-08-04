@@ -12,7 +12,7 @@ export default {
   data () {
     return {
        message: 'http://js.project/wordpress/wp-json/wp/v2/categories',
-       cats: '[]'
+       cats: []
     }
   },
   components: {
